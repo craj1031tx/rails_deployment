@@ -1,0 +1,14 @@
+<h1>Welcome to the edit page, <%=@user.name%></h1>
+<form action="/users/<%=@user.id%>/edit" method="POST">
+	Edit Name: <input type="text" name="edit[name]" id="name" value="<%=@user.name%>"><br>
+	Edit Email: <input type="text" name="edit[email]" id="email" value="<%=@user.email%>"><br>
+	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+	<input type="submit" name="update" value="Update">
+</form>
+
+Alternatively, you can delete your account by clicking the following button:
+<form action="/users/<%=@user.id%>" method="POST">
+	<input type="submit" name="delete_account" value="Delete Account">
+	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+	<input type="hidden" name="_method" value="delete">
+</form>

@@ -1,0 +1,27 @@
+<h1>Welcome to the users page.</h1>
+Hello there, <%=@user.name%>
+<h3>You can edit your profile here: <a href="/users/<%=@user.id%>/edit">Edit Profile</a></h3>
+
+<h2>Here are your secrets...</h2>
+<%@user.secrets.each do |s|%>
+	<p><%=s.content%></p>
+	<p>
+		<form action="/secrets/<%=s.id%>" method="POST">
+			<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+			<input type="hidden" name="_method" value="delete">
+			<input type="submit" name="delete_secret" value="Delete">
+		</form>
+	</p>
+	<p><%=s.likes.count%> likes</p>
+	<form action="/secrets/<%=s.id%>", method="POST">
+		<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+		<input type="submit" name="like_a_secret" id="Like" value="Like">
+	</form>
+<%end%>
+
+<h2>Create a new secret here:</h2>
+<form action="/secrets/add" method="POST">
+	<input type="text" name="secret[content]" id="new_secret">
+	<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+	<input type="submit" name="submit_secret" value="Create Secret">
+</form>
